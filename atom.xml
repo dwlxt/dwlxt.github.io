@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>春风十里鸭的技术小屋</title>
+  <icon>https://www.gravatar.com/avatar/786fb7278c2edcc5decc266933c9db8c</icon>
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-06-10T10:39:06.040Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Ding wei</name>
+    <email>1009245075@qq.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</title>
+    <link href="http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/"/>
+    <id>http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/</id>
+    <published>2022-06-10T10:35:04.000Z</published>
+    <updated>2022-06-10T10:39:06.040Z</updated>
+    
+    <content type="html"><![CDATA[<p>﻿  由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。<br>  以下是txt转成excel操作过程中可能碰到的问题。</p><ol><li><p>注意空格，因为python本身没有{ }用来对齐，因此空格不要乱调，不然影响语句逻辑关系</p></li><li><p>处理数据时，<strong>修改dir那里的地址</strong>，改成你要处理的文件夹地址，这里注意语言本身可能不识别转义字符</p></li><li><p>然后就是list.replace(‘.txt’,’.xlsx’)，这里是将文件转名字用的，所以要看好需要处理文件的格式，填错了将无法识别文件</p></li><li><p>其他的就是注意符号的中英文</p></li><li><p> 配置好python环境后，下载包 xlsxwriter，否则会报错，以后调其他的py包也一样，百度一下调报的代码，cmd中输入</p></li></ol><p>这里的命令是  （tips：导入包时因为有些地址是国外的，速度比较慢，可以百度看看国内的版本，如我附的这个）</p><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip3 install xlsxwriter -i https://pypi.douban.com/simple</span><br></pre></td></tr></table></figure><p>代码如下：（只需要改一下dir路径名就可以）</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> xlsxwriter</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span> = <span class="string">&quot;C:/Users/10092/Desktop/1&quot;</span> <span class="comment">#绝对路径</span></span><br><span class="line">lists = os.listdir(<span class="built_in">dir</span>) <span class="comment">#获取目录下的所有文件名</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">list</span> <span class="keyword">in</span> lists: <span class="comment">#遍历文件名</span></span><br><span class="line">  txt_dir = os.path.join(<span class="built_in">dir</span>,<span class="built_in">list</span>) <span class="comment">#每个txt文件的路径</span></span><br><span class="line">  f = <span class="built_in">open</span>(txt_dir,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">  contexts = f.readlines() <span class="comment"># 获取txt文件内容</span></span><br><span class="line">  sheet_name = <span class="built_in">list</span>.replace(<span class="string">&#x27;.log&#x27;</span>,<span class="string">&#x27;.xlsx&#x27;</span>) <span class="comment">#excel文件取名</span></span><br><span class="line">  file = xlsxwriter.Workbook(sheet_name) <span class="comment">#创建excl</span></span><br><span class="line">  sheet = file.add_worksheet() <span class="comment">#创建工作表</span></span><br><span class="line">  i = <span class="number">0</span> <span class="comment">#excel表格中的第一行</span></span><br><span class="line">  <span class="keyword">for</span> context <span class="keyword">in</span> contexts:</span><br><span class="line">    context = context.strip(<span class="string">&#x27;\n&#x27;</span>) </span><br><span class="line">    context = context.split(<span class="string">&#x27;,&#x27;</span>) <span class="comment">#通过指定分隔符(,)对字符串进行切片</span></span><br><span class="line">    sheet.write_column(i, <span class="number">0</span>, context) <span class="comment">#第i行，第0列（在工作表中写入文本内容）</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">  file.close()</span><br></pre></td></tr></table></figure><p>实现提取text最后一行数据的代码：（注意点在代码下面）</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"> </span><br><span class="line">path = <span class="string">&#x27;C:/Users/10092/Desktop/4&#x27;</span><span class="comment">#绝对路径</span></span><br><span class="line">path_list = os.listdir(path)<span class="comment">#这里选择处理包的路径</span></span><br><span class="line">path_list.sort(key=<span class="keyword">lambda</span> x:<span class="built_in">int</span>(x[<span class="number">14</span>:-<span class="number">4</span>]))</span><br><span class="line"><span class="comment"># 检查获得的文件名是否按顺序排列：print(path_list)</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;result.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#逐个打开文件</span></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> path_list:</span><br><span class="line">    fe = <span class="built_in">open</span>(os.path.join(path,filename),<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    lines = fe.readlines()</span><br><span class="line">    last_line=lines[-<span class="number">1</span>]</span><br><span class="line">    f.write(last_line)</span><br><span class="line">    <span class="comment">#print(last_line)</span></span><br><span class="line">    <span class="comment">#创建一个名为“ result.txt”的文件：</span></span><br></pre></td></tr></table></figure><p>使用说明：<br>（1）上面执行后，得到的是txt文件，再用一下之前转excel代码（将result.txt文件放到一个包，然后注意改一下路径，改成你放的包的路径）<br>这里得到的是倒序的（跟包里文件相反）<br>（2）自己在excel第一列插入一列新的列，标上1,2,3…，然后ctrl+A全选，选择排序，自定义排序，按A倒序<br>（3）然后选择B列，点击数据，选择分列，选分隔符号，下一步，选空格，完成<br>（4）然后将数据放到你的表格中</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;﻿  由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。&lt;br&gt;  以下是txt转成excel操作过程中可能碰到的问题。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;注意空格，因为python本身没有{ }用来对齐，因此</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第一篇</title>
+    <link href="http://example.com/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
+    <id>http://example.com/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/</id>
+    <published>2022-06-09T08:13:33.000Z</published>
+    <updated>2022-06-09T08:13:33.337Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2022/06/09/hello-world/"/>
+    <id>http://example.com/2022/06/09/hello-world/</id>
+    <published>2022-06-09T08:06:41.397Z</published>
+    <updated>1985-10-26T08:15:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>

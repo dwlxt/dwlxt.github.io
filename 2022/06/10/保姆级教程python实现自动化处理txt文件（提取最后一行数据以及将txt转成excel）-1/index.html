@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel） | 春风十里鸭的技术小屋</title><meta name="author" content="Ding wei,1009245075@qq.com"><meta name="copyright" content="Ding wei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。  以下是txt转成excel操作过程中可能碰到的问题。  注意空格，因为python本身没有{ }用来对齐，因此空格不要乱调，不然影响语句逻辑关系  处理数据时，修改dir那里的地址，改成你要处理的文件夹地址，这里注意语言本身可能不识别转义字符  然后就是list.repla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）">
+<meta property="og:url" content="http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/index.html">
+<meta property="og:site_name" content="春风十里鸭的技术小屋">
+<meta property="og:description" content="由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。  以下是txt转成excel操作过程中可能碰到的问题。  注意空格，因为python本身没有{ }用来对齐，因此空格不要乱调，不然影响语句逻辑关系  处理数据时，修改dir那里的地址，改成你要处理的文件夹地址，这里注意语言本身可能不识别转义字符  然后就是list.repla">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/archive.jpg">
+<meta property="article:published_time" content="2022-06-10T10:35:04.000Z">
+<meta property="article:modified_time" content="2022-06-10T10:39:06.040Z">
+<meta property="article:author" content="Ding wei">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/archive.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ding wei","link":"链接: ","source":"来源: 春风十里鸭的技术小屋","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2022-06-10 18:39:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="春风十里鸭的技术小屋" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">春风十里鸭的技术小屋</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-10T10:35:04.000Z" title="发表于 2022-06-10 18:35:04">2022-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-10T10:39:06.040Z" title="更新于 2022-06-10 18:39:06">2022-06-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>﻿  由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。<br>  以下是txt转成excel操作过程中可能碰到的问题。</p>
+<ol>
+<li><p>注意空格，因为python本身没有{ }用来对齐，因此空格不要乱调，不然影响语句逻辑关系</p>
+</li>
+<li><p>处理数据时，<strong>修改dir那里的地址</strong>，改成你要处理的文件夹地址，这里注意语言本身可能不识别转义字符</p>
+</li>
+<li><p>然后就是list.replace(‘.txt’,’.xlsx’)，这里是将文件转名字用的，所以要看好需要处理文件的格式，填错了将无法识别文件</p>
+</li>
+<li><p>其他的就是注意符号的中英文</p>
+</li>
+<li><p> 配置好python环境后，下载包 xlsxwriter，否则会报错，以后调其他的py包也一样，百度一下调报的代码，cmd中输入</p>
+</li>
+</ol>
+<p>这里的命令是  （tips：导入包时因为有些地址是国外的，速度比较慢，可以百度看看国内的版本，如我附的这个）</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip3 install xlsxwriter -i https://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
+
+<p>代码如下：（只需要改一下dir路径名就可以）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> xlsxwriter</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span> = <span class="string">&quot;C:/Users/10092/Desktop/1&quot;</span> <span class="comment">#绝对路径</span></span><br><span class="line">lists = os.listdir(<span class="built_in">dir</span>) <span class="comment">#获取目录下的所有文件名</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">list</span> <span class="keyword">in</span> lists: <span class="comment">#遍历文件名</span></span><br><span class="line">  txt_dir = os.path.join(<span class="built_in">dir</span>,<span class="built_in">list</span>) <span class="comment">#每个txt文件的路径</span></span><br><span class="line">  f = <span class="built_in">open</span>(txt_dir,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">  contexts = f.readlines() <span class="comment"># 获取txt文件内容</span></span><br><span class="line">  sheet_name = <span class="built_in">list</span>.replace(<span class="string">&#x27;.log&#x27;</span>,<span class="string">&#x27;.xlsx&#x27;</span>) <span class="comment">#excel文件取名</span></span><br><span class="line">  file = xlsxwriter.Workbook(sheet_name) <span class="comment">#创建excl</span></span><br><span class="line">  sheet = file.add_worksheet() <span class="comment">#创建工作表</span></span><br><span class="line">  i = <span class="number">0</span> <span class="comment">#excel表格中的第一行</span></span><br><span class="line">  <span class="keyword">for</span> context <span class="keyword">in</span> contexts:</span><br><span class="line">    context = context.strip(<span class="string">&#x27;\n&#x27;</span>) </span><br><span class="line">    context = context.split(<span class="string">&#x27;,&#x27;</span>) <span class="comment">#通过指定分隔符(,)对字符串进行切片</span></span><br><span class="line">    sheet.write_column(i, <span class="number">0</span>, context) <span class="comment">#第i行，第0列（在工作表中写入文本内容）</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">  file.close()</span><br></pre></td></tr></table></figure>
+
+<p>实现提取text最后一行数据的代码：（注意点在代码下面）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"> </span><br><span class="line">path = <span class="string">&#x27;C:/Users/10092/Desktop/4&#x27;</span><span class="comment">#绝对路径</span></span><br><span class="line">path_list = os.listdir(path)<span class="comment">#这里选择处理包的路径</span></span><br><span class="line">path_list.sort(key=<span class="keyword">lambda</span> x:<span class="built_in">int</span>(x[<span class="number">14</span>:-<span class="number">4</span>]))</span><br><span class="line"><span class="comment"># 检查获得的文件名是否按顺序排列：print(path_list)</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;result.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#逐个打开文件</span></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> path_list:</span><br><span class="line">    fe = <span class="built_in">open</span>(os.path.join(path,filename),<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    lines = fe.readlines()</span><br><span class="line">    last_line=lines[-<span class="number">1</span>]</span><br><span class="line">    f.write(last_line)</span><br><span class="line">    <span class="comment">#print(last_line)</span></span><br><span class="line">    <span class="comment">#创建一个名为“ result.txt”的文件：</span></span><br></pre></td></tr></table></figure>
+
+<p>使用说明：<br>（1）上面执行后，得到的是txt文件，再用一下之前转excel代码（将result.txt文件放到一个包，然后注意改一下路径，改成你放的包的路径）<br>这里得到的是倒序的（跟包里文件相反）<br>（2）自己在excel第一列插入一列新的列，标上1,2,3…，然后ctrl+A全选，选择排序，自定义排序，按A倒序<br>（3）然后选择B列，点击数据，选择分列，选分隔符号，下一步，选空格，完成<br>（4）然后将数据放到你的表格中</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Ding wei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/">http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">春风十里鸭的技术小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/archive.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/ShareJS/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/ShareJS/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/"><img class="next-cover" src="/img/archive2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第一篇</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ding wei</div><div class="author-info__description">欢迎来到春风十里鸭的技术小屋</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dwlxt"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/" title="python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）">python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</a><time datetime="2022-06-10T10:35:04.000Z" title="发表于 2022-06-10 18:35:04">2022-06-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/" title="第一篇">第一篇</a><time datetime="2022-06-09T08:13:33.000Z" title="发表于 2022-06-09 16:13:33">2022-06-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/09/hello-world/" title="Hello World">Hello World</a><time datetime="2022-06-09T08:06:41.397Z" title="发表于 2022-06-09 16:06:41">2022-06-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By Ding wei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://example.com/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/'
+    this.page.identifier = '/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/'
+    this.page.title = 'python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+
+  document.getElementById('darkmode').addEventListener('click', () => {
+    setTimeout(() => window.disqusReset(), 200)
+  })
+}
+
+if ('Valine' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
