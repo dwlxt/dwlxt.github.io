@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C++小结 | 春风十里鸭的技术小屋</title><meta name="author" content="Ding wei,1009245075@qq.com"><meta name="copyright" content="Ding wei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++相较于c异同,优势,注意点 c语法可以在c++中用，输入scanf和输出print效率比cin和cout快，算法题中时间超过的可以试试他们，做简单题时，cin和cout更方便  c++的STL标准模板库，很多leedcode题用得到。c++标配：using namespace std;以及return 0;  scanf和printf在stdio.h里，cin和cout在iostream里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++小结">
+<meta property="og:url" content="http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="春风十里鸭的技术小屋">
+<meta property="og:description" content="C++相较于c异同,优势,注意点 c语法可以在c++中用，输入scanf和输出print效率比cin和cout快，算法题中时间超过的可以试试他们，做简单题时，cin和cout更方便  c++的STL标准模板库，很多leedcode题用得到。c++标配：using namespace std;以及return 0;  scanf和printf在stdio.h里，cin和cout在iostream里">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/archive.jpg">
+<meta property="article:published_time" content="2022-06-14T07:16:23.000Z">
+<meta property="article:modified_time" content="2022-06-14T07:17:06.614Z">
+<meta property="article:author" content="Ding wei">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/archive.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ding wei","link":"链接: ","source":"来源: 春风十里鸭的技术小屋","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++小结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-06-14 15:17:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="春风十里鸭的技术小屋" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">春风十里鸭的技术小屋</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++小结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-14T07:16:23.000Z" title="发表于 2022-06-14 15:16:23">2022-06-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-14T07:17:06.614Z" title="更新于 2022-06-14 15:17:06">2022-06-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++小结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="C-相较于c异同-优势-注意点"><a href="#C-相较于c异同-优势-注意点" class="headerlink" title="C++相较于c异同,优势,注意点"></a>C++相较于c异同,优势,注意点</h2><ul>
+<li><p>c语法可以在c++中用，输入scanf和输出print效率比cin和cout快，算法题中时间超过的可以试试他们，做简单题时，cin和cout更方便</p>
+</li>
+<li><p>c++的STL标准模板库，很多leedcode题用得到。c++标配：<code>using namespace std;</code>以及<code>return 0;</code></p>
+</li>
+<li><p>scanf和printf在stdio.h里，cin和cout在iostream里</p>
+</li>
+<li><p>cin&gt;&gt;n是传值进n，所以是&gt;&gt;。cout同理</p>
+</li>
+<li><p>endl转行等同于’\n’</p>
+</li>
+<li><p>c++使用c头文件格式：<code>#include &lt;cmath&gt;</code>(相当于c去掉.h)</p>
+</li>
+<li><p>bool值为true和false，也可判断数字，非0则true</p>
+</li>
+<li><p>const定义常量，也定义数据类型</p>
+</li>
+<li><p>相较于c用char[]处理字符串，c++使用string（和java一样,但s不用大写），<strong>注意string只能用cin和cout</strong></p>
+<p>cin读字符串以空格为分隔符，读整行字符串（带空格）可用<strong>getline</strong>，用法<code>getline(cin,s)</code></p>
+<p>substr截取子串，用法<code>string s1 =  s.substr(a,b) //从下标a开始，b个字符，无b表示到最后一个</code></p>
+</li>
+<li><p>c++定义struct后，使用不要再写struct（类比class类）</p>
+</li>
+<li><p>c++定义数组vector（动态数组）(c用<code>int arr[]</code>,不能随意改变长度)，头文件<code>#include &lt;vector&gt;</code></p>
+<p>可以直接分配大小，也可以resize定义，不需要初始化默认为0</p>
+<ol>
+<li><p>用法<code>vector&lt;int&gt; v1(a,b)//a是数组大小，b是给每个元素复制</code>        末尾加元素<code>v1.push_back(i)</code></p>
+</li>
+<li><p>迭代器遍历访问(vector,set,都一样)，v1.begin()指向第一个元素的指针，v1.end()指向最后一个元素的后一个位置。</p>
+<p>使用：<code>for(auto it = v1.begin();it != v1.end;it++)</code>访问用<code>cout&lt;&lt;*it</code></p>
+</li>
+</ol>
+</li>
+<li><p><code>#include &lt;cctype&gt; </code></p>
+<p>判断字母isalpha(c)      (包括⼤写、⼩写)              ⼩写字⺟islower(c)               大写字⺟isupper(c)</p>
+<p>字⺟⼤写⼩写+数字isalnum(c)        (space和 \t) isblank (c)        （ space 、 \t 、 \r 、 \n ）isspace(c)</p>
+<p>大写转小写tolower(c)         小写转大写toupper(c)</p>
+</li>
+</ul>
+<h2 id="c-细节"><a href="#c-细节" class="headerlink" title="c++细节"></a>c++细节</h2><ul>
+<li><p>c++容器：vector,stack,queue,map,set.均可用.size获取大小，.length也可以写成.size</p>
+</li>
+<li><p>集合set中元素不同，set会按从小到大排（调用<code>#include &lt;set&gt;</code>）</p>
+<ul>
+<li>用法：<code>set&lt;int&gt; s</code>        插入<code>s.insert(1)</code>       输出第一个<code>*(s.begin())</code></li>
+</ul>
+<p>​       查找i<code>s.find(i) != s.end()</code>    删除i<code>s.erase(i)</code></p>
+<p>​       unordered_set会省去set中按大小排序，刷题超时可以考虑（调用<code>#include &lt;unordered_set&gt;</code>）</p>
+<p>​       其他用法和set相同</p>
+</li>
+<li><p>映射map是键值对，按键从小到大排序（调用<code>#include &lt;map&gt;</code>）</p>
+<ul>
+<li><p>用法<code>map&lt;string,int&gt; m //string为键，int为值</code>      赋值<code>m[&quot;hello&quot;] = 2 //key为hello，value为2</code></p>
+<p>访问value<code>m[&quot;hello&quot;]</code>      </p>
+<p>迭代器输出键<code>it-&gt;first</code>    输出值<code>it-&gt;second</code>    最后一个元素<code>m.rbegin()</code></p>
+<p>unordered_map会省去map中按键值排序，刷题超时可以考虑（调用<code>#include &lt;unordered_map&gt;</code>）</p>
+<p>其他用法和map相同</p>
+</li>
+</ul>
+</li>
+<li><p>栈同ds（调用<code>#include &lt;stack&gt;</code>）</p>
+<p>定义 <code>stack&lt;int&gt; s</code>     进栈<code>s.push()</code>    访问栈顶元素<code>s.top（）</code>       移除栈顶元素<code>s.pop()</code></p>
+</li>
+<li><p>队列同ds（调用<code>#include &lt;queue&gt;</code>）</p>
+<p>定义 <code>queue&lt;int&gt; q</code>     进队列<code>q.push()</code>    访问队首元素<code>q.front（）</code>       访问队首元素<code>q.back（）</code></p>
+<p>移除队首元素<code>q.pop()</code></p>
+</li>
+<li><blockquote>
+<p>位运算bitset（调用<code>#include &lt;&lt;bitset&gt;</code>）</p>
+</blockquote>
+</li>
+<li><p>sort（调用<code>#include &lt;algorithm&gt;</code>）</p>
+<p>使用<code>sort(v.begin(), v.end()) //默认从小到大</code>        </p>
+<p>可使用cmp设置排序规则<code>sort(v.begin(), v.end()，cmp) </code>  </p>
+<p><code>bool cmp(int a, int b) &#123;return a &gt; b;&#125;  //从大到小</code>   注：只能是&gt;或者&lt;</p>
+<p>cmp可以使用结构体指定排序规则</p>
+</li>
+<li><p>c++11实用技巧</p>
+<p>auto x 自动推断变量类型               <code>set&lt;int&gt;::iterator it</code>（迭代器声明可以用auto it）</p>
+<p>for循环（遍历整个数组方便）   修改数组元素值需要&amp;i</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i : arr)</span><br><span class="line"> cout &lt;&lt; i &lt;&lt; endl; <span class="comment">//遍历整个数组，并输出每个元素</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>​       to_string （调用<code> #include &lt;string&gt;</code>）   数字转字符串</p>
+<p>​       stoi        将字符串转化为int</p>
+<p>​       stod      将字符串转化为double</p>
+<ul>
+<li><p>reverse翻转（random_shuffle随机打乱，用法和reverse一样）</p>
+<p>用法：翻转vector<code>reverse(a.begin(), a.end());</code>              翻转数组<code>reverse(a + 1, a + 1 + n);</code></p>
+</li>
+<li><p>unique去重</p>
+</li>
+</ul>
+<p>​       用法：去重vector<code>unique(a.begin(), a.end()) – a.begin();</code>              去重数组<code>unique(a + 1, a + 1 + n) – (a + 1);</code></p>
+<ul>
+<li>lower_bound/upper_bound 二分查找</li>
+</ul>
+<p>​       用法：<code>int I = lower_bound(a + 1, a + 1 + n,. x) – a; </code> </p>
+<p>​          找有序vector小于等于x最大整数（upper类似，小于等于）<code>int y = *--upper_bound(a.begin(), a.end(), x);</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Ding wei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/">http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">春风十里鸭的技术小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/archive.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/ShareJS/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/ShareJS/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/"><img class="next-cover" src="/img/archive.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ding wei</div><div class="author-info__description">欢迎来到春风十里鸭的技术小屋</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dwlxt"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9B%B8%E8%BE%83%E4%BA%8Ec%E5%BC%82%E5%90%8C-%E4%BC%98%E5%8A%BF-%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">C++相较于c异同,优势,注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E7%BB%86%E8%8A%82"><span class="toc-number">2.</span> <span class="toc-text">c++细节</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/14/C-%E5%B0%8F%E7%BB%93/" title="C++小结">C++小结</a><time datetime="2022-06-14T07:16:23.000Z" title="发表于 2022-06-14 15:16:23">2022-06-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/10/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8Bpython%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86txt%E6%96%87%E4%BB%B6%EF%BC%88%E6%8F%90%E5%8F%96%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E5%B0%86txt%E8%BD%AC%E6%88%90excel%EF%BC%89-1/" title="python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）">python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</a><time datetime="2022-06-10T10:35:04.000Z" title="发表于 2022-06-10 18:35:04">2022-06-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By Ding wei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/'
+    this.page.identifier = '/2022/06/14/C-%E5%B0%8F%E7%BB%93/'
+    this.page.title = 'C++小结'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+
+  document.getElementById('darkmode').addEventListener('click', () => {
+    setTimeout(() => window.disqusReset(), 200)
+  })
+}
+
+if ('Valine' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

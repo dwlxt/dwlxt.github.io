@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-06-10T10:39:06.040Z</updated>
+  <updated>2022-06-14T07:17:06.614Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++小结</title>
+    <link href="http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/"/>
+    <id>http://example.com/2022/06/14/C-%E5%B0%8F%E7%BB%93/</id>
+    <published>2022-06-14T07:16:23.000Z</published>
+    <updated>2022-06-14T07:17:06.614Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="C-相较于c异同-优势-注意点"><a href="#C-相较于c异同-优势-注意点" class="headerlink" title="C++相较于c异同,优势,注意点"></a>C++相较于c异同,优势,注意点</h2><ul><li><p>c语法可以在c++中用，输入scanf和输出print效率比cin和cout快，算法题中时间超过的可以试试他们，做简单题时，cin和cout更方便</p></li><li><p>c++的STL标准模板库，很多leedcode题用得到。c++标配：<code>using namespace std;</code>以及<code>return 0;</code></p></li><li><p>scanf和printf在stdio.h里，cin和cout在iostream里</p></li><li><p>cin&gt;&gt;n是传值进n，所以是&gt;&gt;。cout同理</p></li><li><p>endl转行等同于’\n’</p></li><li><p>c++使用c头文件格式：<code>#include &lt;cmath&gt;</code>(相当于c去掉.h)</p></li><li><p>bool值为true和false，也可判断数字，非0则true</p></li><li><p>const定义常量，也定义数据类型</p></li><li><p>相较于c用char[]处理字符串，c++使用string（和java一样,但s不用大写），<strong>注意string只能用cin和cout</strong></p><p>cin读字符串以空格为分隔符，读整行字符串（带空格）可用<strong>getline</strong>，用法<code>getline(cin,s)</code></p><p>substr截取子串，用法<code>string s1 =  s.substr(a,b) //从下标a开始，b个字符，无b表示到最后一个</code></p></li><li><p>c++定义struct后，使用不要再写struct（类比class类）</p></li><li><p>c++定义数组vector（动态数组）(c用<code>int arr[]</code>,不能随意改变长度)，头文件<code>#include &lt;vector&gt;</code></p><p>可以直接分配大小，也可以resize定义，不需要初始化默认为0</p><ol><li><p>用法<code>vector&lt;int&gt; v1(a,b)//a是数组大小，b是给每个元素复制</code>        末尾加元素<code>v1.push_back(i)</code></p></li><li><p>迭代器遍历访问(vector,set,都一样)，v1.begin()指向第一个元素的指针，v1.end()指向最后一个元素的后一个位置。</p><p>使用：<code>for(auto it = v1.begin();it != v1.end;it++)</code>访问用<code>cout&lt;&lt;*it</code></p></li></ol></li><li><p><code>#include &lt;cctype&gt; </code></p><p>判断字母isalpha(c)      (包括⼤写、⼩写)              ⼩写字⺟islower(c)               大写字⺟isupper(c)</p><p>字⺟⼤写⼩写+数字isalnum(c)        (space和 \t) isblank (c)        （ space 、 \t 、 \r 、 \n ）isspace(c)</p><p>大写转小写tolower(c)         小写转大写toupper(c)</p></li></ul><h2 id="c-细节"><a href="#c-细节" class="headerlink" title="c++细节"></a>c++细节</h2><ul><li><p>c++容器：vector,stack,queue,map,set.均可用.size获取大小，.length也可以写成.size</p></li><li><p>集合set中元素不同，set会按从小到大排（调用<code>#include &lt;set&gt;</code>）</p><ul><li>用法：<code>set&lt;int&gt; s</code>        插入<code>s.insert(1)</code>       输出第一个<code>*(s.begin())</code></li></ul><p>​       查找i<code>s.find(i) != s.end()</code>    删除i<code>s.erase(i)</code></p><p>​       unordered_set会省去set中按大小排序，刷题超时可以考虑（调用<code>#include &lt;unordered_set&gt;</code>）</p><p>​       其他用法和set相同</p></li><li><p>映射map是键值对，按键从小到大排序（调用<code>#include &lt;map&gt;</code>）</p><ul><li><p>用法<code>map&lt;string,int&gt; m //string为键，int为值</code>      赋值<code>m[&quot;hello&quot;] = 2 //key为hello，value为2</code></p><p>访问value<code>m[&quot;hello&quot;]</code>      </p><p>迭代器输出键<code>it-&gt;first</code>    输出值<code>it-&gt;second</code>    最后一个元素<code>m.rbegin()</code></p><p>unordered_map会省去map中按键值排序，刷题超时可以考虑（调用<code>#include &lt;unordered_map&gt;</code>）</p><p>其他用法和map相同</p></li></ul></li><li><p>栈同ds（调用<code>#include &lt;stack&gt;</code>）</p><p>定义 <code>stack&lt;int&gt; s</code>     进栈<code>s.push()</code>    访问栈顶元素<code>s.top（）</code>       移除栈顶元素<code>s.pop()</code></p></li><li><p>队列同ds（调用<code>#include &lt;queue&gt;</code>）</p><p>定义 <code>queue&lt;int&gt; q</code>     进队列<code>q.push()</code>    访问队首元素<code>q.front（）</code>       访问队首元素<code>q.back（）</code></p><p>移除队首元素<code>q.pop()</code></p></li><li><blockquote><p>位运算bitset（调用<code>#include &lt;&lt;bitset&gt;</code>）</p></blockquote></li><li><p>sort（调用<code>#include &lt;algorithm&gt;</code>）</p><p>使用<code>sort(v.begin(), v.end()) //默认从小到大</code>        </p><p>可使用cmp设置排序规则<code>sort(v.begin(), v.end()，cmp) </code>  </p><p><code>bool cmp(int a, int b) &#123;return a &gt; b;&#125;  //从大到小</code>   注：只能是&gt;或者&lt;</p><p>cmp可以使用结构体指定排序规则</p></li><li><p>c++11实用技巧</p><p>auto x 自动推断变量类型               <code>set&lt;int&gt;::iterator it</code>（迭代器声明可以用auto it）</p><p>for循环（遍历整个数组方便）   修改数组元素值需要&amp;i</p><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i : arr)</span><br><span class="line"> cout &lt;&lt; i &lt;&lt; endl; <span class="comment">//遍历整个数组，并输出每个元素</span></span><br></pre></td></tr></table></figure></li></ul><p>​       to_string （调用<code> #include &lt;string&gt;</code>）   数字转字符串</p><p>​       stoi        将字符串转化为int</p><p>​       stod      将字符串转化为double</p><ul><li><p>reverse翻转（random_shuffle随机打乱，用法和reverse一样）</p><p>用法：翻转vector<code>reverse(a.begin(), a.end());</code>              翻转数组<code>reverse(a + 1, a + 1 + n);</code></p></li><li><p>unique去重</p></li></ul><p>​       用法：去重vector<code>unique(a.begin(), a.end()) – a.begin();</code>              去重数组<code>unique(a + 1, a + 1 + n) – (a + 1);</code></p><ul><li>lower_bound/upper_bound 二分查找</li></ul><p>​       用法：<code>int I = lower_bound(a + 1, a + 1 + n,. x) – a; </code> </p><p>​          找有序vector小于等于x最大整数（upper类似，小于等于）<code>int y = *--upper_bound(a.begin(), a.end(), x);</code></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;C-相较于c异同-优势-注意点&quot;&gt;&lt;a href=&quot;#C-相较于c异同-优势-注意点&quot; class=&quot;headerlink&quot; title=&quot;C++相较于c异同,优势,注意点&quot;&gt;&lt;/a&gt;C++相较于c异同,优势,注意点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;c语法可以在c</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>python实现自动化处理txt文件（提取最后一行数据以及将txt转成excel）</title>
@@ -31,39 +52,6 @@
     <summary type="html">&lt;p&gt;﻿  由于老师需要处理大量数据，所以想着用python写一个自动化处理的数据的代码，经过一会儿尝试，实现了我处理数据需求。&lt;br&gt;  以下是txt转成excel操作过程中可能碰到的问题。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;注意空格，因为python本身没有{ }用来对齐，因此</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>第一篇</title>
-    <link href="http://example.com/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
-    <id>http://example.com/2022/06/09/%E7%AC%AC%E4%B8%80%E7%AF%87/</id>
-    <published>2022-06-09T08:13:33.000Z</published>
-    <updated>2022-06-09T08:13:33.337Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2022/06/09/hello-world/"/>
-    <id>http://example.com/2022/06/09/hello-world/</id>
-    <published>2022-06-09T08:06:41.397Z</published>
-    <updated>1985-10-26T08:15:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
       
     
     
